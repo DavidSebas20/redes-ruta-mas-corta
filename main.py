@@ -10,7 +10,7 @@ class GraphApp:
         
         self.graph = nx.Graph()
         
-        # GUI Elements
+
         self.node_label = tk.Label(root, text="Nodo:")
         self.node_label.grid(row=0, column=0)
         self.node_entry = tk.Entry(root)
@@ -62,7 +62,7 @@ class GraphApp:
             self.graph.add_edge(node1, node2, weight=distance)
             self.connection_entry.delete(0, tk.END)
             
-            # Update listbox with new connection
+
             self.connections_listbox.insert(tk.END, f"{node1} - {node2}: {distance}")
         except ValueError:
             messagebox.showerror("Error", "Ingrese una conexión válida en el formato 'Nodo1 Nodo2 Distancia'.")
@@ -75,8 +75,7 @@ class GraphApp:
                 shortest_path = nx.dijkstra_path(self.graph, start_node, end_node)
                 path_length = nx.dijkstra_path_length(self.graph, start_node, end_node)
                 
-                
-                # Display shortest path details
+
                 self.result_text.delete(1.0, tk.END)
                 self.result_text.insert(tk.END, f"Ruta más corta: {' -> '.join(shortest_path)}\n")
                 self.result_text.insert(tk.END, f"Distancia total: {path_length}")
@@ -91,10 +90,9 @@ class GraphApp:
         pos = nx.spring_layout(self.graph)
         plt.figure()
         
-        # Draw the graph
+
         nx.draw(self.graph, pos, with_labels=True, node_color='lightblue', edge_color='gray')
         
-        # Highlight the shortest path
         path_edges = list(zip(shortest_path, shortest_path[1:]))
         nx.draw_networkx_nodes(self.graph, pos, nodelist=shortest_path, node_color='orange')
         nx.draw_networkx_edges(self.graph, pos, edgelist=path_edges, edge_color='red', width=2)
